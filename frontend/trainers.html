@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="da">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,47 +7,65 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <h1>Mit Pokédex</h1>
-        <nav>
-            <a href="pokemon.html">Pokémon</a>
-            <a href="trainers.html">Trainers</a>
-            <a href="dashboard.html">Dashboard</a>
-        </nav>
-    </header>
 
-    <main>
-        <h2>Trainers</h2>
-        <h3>Opret en ny trainer</h3>
-        <div class="form-box">
-            <label for="trainerName">Navn</label>
-            <input id="trainerName" type="text" placeholder="Navn">
-            <label for="trainerAge">Alder</label>
-            <input id="trainerAge" type="number" min="1" placeholder="Alder">
-            <label for="trainerHometown">Hjemby</label>
-            <input id="trainerHometown" type="text" placeholder="Hjemby">
-            <button id="createButton">Opret trainer</button>
-        </div>
-        <p id="trainerMessage"></p>
+<!-- Overskrift og navigation mellem siderne -->
+<header>
+    <h1>My Pokédex</h1>
+    <nav>
+        <a href="pokemon.html">Pokémon</a>
+        <a href="trainers.html">Trainers</a>
+        <a href="dashboard.html">Dashboard</a>
+    </nav>
+</header>
 
-        <h3>Alle trainers</h3>
-        <p>Tryk på en trainer for at se deres Pokémon.</p>
-        <ul id="trainerList"></ul>
+<main>
+    <h2>Trainers</h2>
 
-        <h3>Tilføj Pokémon til en trainer</h3>
-        <div class="form-box">
-            <label for="trainerId">Trainer ID</label>
-            <input id="trainerId" type="number" min="1" placeholder="F.eks. 1">
-            <label for="pokemonId">Pokédex-nummer</label>
-            <input id="pokemonId" type="number" min="1" max="151" placeholder="F.eks. 25">
-            <button id="addButton">Tilføj Pokémon</button>
-        </div>
-        <p id="addMessage"></p>
+    <!-- Formular til at oprette en ny trainer -->
+    <h3>Create a new trainer</h3>
+    <div class="form-box">
+        <label for="trainerName">Name</label>
+        <input id="trainerName" type="text" placeholder="Name">
 
-        <h3>Trainerens Pokémon</h3>
-        <ul id="trainerPokemonList"></ul>
-    </main>
+        <label for="trainerAge">Age</label>
+        <input id="trainerAge" type="number" min="1" placeholder="Age">
 
-    <script src="js/trainers.js"></script>
+        <label for="trainerHometown">Hometown</label>
+        <input id="trainerHometown" type="text" placeholder="Hometown">
+
+        <button id="createButton">Create trainer</button>
+    </div>
+
+    <!-- Viser besked når en trainer oprettes -->
+    <p id="trainerMessage"></p>
+
+    <!-- Viser alle trainers fra API'et -->
+    <h3>All trainers</h3>
+    <p>Click a trainer to see their Pokémon.</p>
+    <ul id="trainerList"></ul>
+
+    <!-- Formular til at tilføje Pokémon til en trainer -->
+    <h3>Add Pokémon to a trainer</h3>
+    <div class="form-box">
+        <label for="trainerId">Trainer ID</label>
+        <input id="trainerId" type="number" min="1" placeholder="E.g. 1">
+
+        <label for="pokemonId">Pokédex number</label>
+        <input id="pokemonId" type="number" min="1" max="151" placeholder="E.g. 25">
+
+        <button id="addButton">Add Pokémon</button>
+    </div>
+
+    <!-- Viser besked når en Pokémon tilføjes -->
+    <p id="addMessage"></p>
+
+    <!-- Viser hvilke Pokémon en trainer har -->
+    <h3>Trainer's Pokémon</h3>
+    <ul id="trainerPokemonList"></ul>
+</main>
+
+<!-- Henter JavaScript til trainers-siden -->
+<script src="js/trainers.js"></script>
+
 </body>
 </html>

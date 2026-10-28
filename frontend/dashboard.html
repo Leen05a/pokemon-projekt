@@ -1,37 +1,62 @@
 <!DOCTYPE html>
-<html lang="da">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokédex - Dashboard</title>
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Henter Chart.js til at lave diagrammer -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Mit Pokédex</h1>
-        <nav>
-            <a href="pokemon.html">Pokémon</a>
-            <a href="trainers.html">Trainers</a>
-            <a href="dashboard.html">Dashboard</a>
-        </nav>
-    </header>
 
-    <main>
-        <h2>Dashboard</h2>
-        <section class="stats">
-            <div class="stat-box"><h3>Antal Pokémon</h3><p id="pokemonCount">Henter...</p></div>
-            <div class="stat-box"><h3>Antal trainers</h3><p id="trainerCount">Henter...</p></div>
-            <div class="stat-box"><h3>Pokémon tildelt til trainers</h3><p id="assignedPokemonCount">Henter...</p></div>
-        </section>
+<!-- Overskrift og navigation mellem siderne -->
+<header>
+    <h1>My Pokédex</h1>
+    <nav>
+        <a href="pokemon.html">Pokémon</a>
+        <a href="trainers.html">Trainers</a>
+        <a href="dashboard.html">Dashboard</a>
+    </nav>
+</header>
 
-        <h3>Pokémon fordelt på primær type</h3>
-        <div class="chart-box"><canvas id="pokemonTypeChart"></canvas></div>
+<main>
+    <h2>Dashboard</h2>
 
-        <h3>Gennemsnitlig attack efter primær type</h3>
-        <div class="chart-box"><canvas id="pokemonAttackChart"></canvas></div>
-    </main>
+    <!-- Viser statistik fra API'et -->
+    <section class="stats">
+        <div class="stat-box">
+            <h3>Total Pokémon</h3>
+            <p id="pokemonCount">Loading...</p>
+        </div>
 
-    <script src="js/dashboard.js"></script>
+        <div class="stat-box">
+            <h3>Total trainers</h3>
+            <p id="trainerCount">Loading...</p>
+        </div>
+
+        <div class="stat-box">
+            <h3>Assigned Pokémon</h3>
+            <p id="assignedPokemonCount">Loading...</p>
+        </div>
+    </section>
+
+    <!-- Diagram over Pokémon fordelt på type -->
+    <h3>Pokémon by primary type</h3>
+    <div class="chart-box pie-chart">
+        <canvas id="pokemonTypeChart"></canvas>
+    </div>
+
+    <!-- Diagram over gennemsnitlig attack for hver type -->
+    <h3>Average attack by primary type</h3>
+    <div class="chart-box">
+        <canvas id="pokemonAttackChart"></canvas>
+    </div>
+</main>
+
+<!-- Henter JavaScript til dashboardet -->
+<script src="js/dashboard.js"></script>
+
 </body>
 </html>

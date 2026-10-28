@@ -1,24 +1,33 @@
-const trainerList = document.getElementById("trainerList");
-const trainerPokemonList = document.getElementById("trainerPokemonList");
-const trainerMessage = document.getElementById("trainerMessage");
-const addMessage = document.getElementById("addMessage");
+// Henter elementerne fra HTML
+const trainerList = document.querySelector("#trainerList");
+const trainerPokemonList = document.querySelector("#trainerPokemonList");
+const trainerMessage = document.querySelector("#trainerMessage");
+const addMessage = document.querySelector("#addMessage");
 
 
+// Henter alle trainers fra API'et
 function getTrainers() {
     fetch("http://localhost:3000/trainers")
         .then(function (response) {
+            if (!response.ok) {
+                throw new Error("Could not fetch trainers");
+            }
             return response.json();
         })
         .then(function (trainers) {
-            trainerList.innerHTML = "";
 
+            // Fjerner den gamle liste
+            trainerList.textContent = "";
+
+            // Viser alle trainers på hjemmesiden
             trainers.forEach(function (trainer) {
                 const li = document.createElement("li");
+
                 li.textContent = trainer.trainer_id + ". " + trainer.trainer_name
-                    + " | Alder: " + trainer.age
-                    + " | Hjemby: " + trainer.hometown;
+                    + " | Age: " + trainer.age
+                    + " | Hometown: " + trainer.hometown;
 
-
+                // Når man klikker på en trainer, vises deres Pokémon
                 li.addEventListener("click", function () {
                     getTrainerPokemon(trainer.trainer_id);
                 });
@@ -28,42 +37,56 @@ function getTrainers() {
         })
         .catch(function (error) {
             console.log(error);
-            trainerMessage.textContent = "Kunne ikke hente trainers. Tjek backend.";
+            trainerMessage.textContent = "Could not fetch trainers. Check that the backend is running.";
         });
 }
 
 
+// Henter en trainers Pokémon fra API'et
 function getTrainerPokemon(id) {
     fetch("http://localhost:3000/trainers/" + id + "/pokemon")
         .then(function (response) {
+            if (!response.ok) {
+                throw new Error("Could not fetch Pokémon");
+            }
             return response.json();
         })
         .then(function (pokemon) {
-            trainerPokemonList.innerHTML = "";
 
+            // Fjerner den gamle Pokémon-liste
+            trainerPokemonList.textContent = "";
+
+            // Viser besked hvis traineren ikke har Pokémon
             if (pokemon.length === 0) {
-                trainerPokemonList.textContent = "Denne trainer har ingen Pokémon endnu.";
+                trainerPokemonList.textContent = "This trainer has no Pokémon yet.";
                 return;
             }
 
+            // Viser trainerens Pokémon
             pokemon.forEach(function (p) {
                 const li = document.createElement("li");
+
                 li.textContent = p.name + " - Type: " + p.primary_type;
+
                 trainerPokemonList.appendChild(li);
             });
         })
         .catch(function (error) {
             console.log(error);
-            trainerPokemonList.textContent = "Kunne ikke hente Pokémon.";
+            trainerPokemonList.textContent = "Could not fetch Pokémon.";
         });
 }
 
 
-document.getElementById("createButton").addEventListener("click", function () {
-    const name = document.getElementById("trainerName").value;
-    const age = document.getElementById("trainerAge").value;
-    const hometown = document.getElementById("trainerHometown").value;
+// Opretter en ny trainer når brugeren klikker på knappen
+document.querySelector("#createButton").addEventListener("click", function () {
 
+    // Henter værdier fra formularen
+    const name = document.querySelector("#trainerName").value;
+    const age = document.querySelector("#trainerAge").value;
+    const hometown = document.querySelector("#trainerHometown").value;
+
+    // Sender den nye trainer til API'et som JSON
     fetch("http://localhost:3000/trainers", {
         method: "POST",
         headers: {
@@ -76,23 +99,34 @@ document.getElementById("createButton").addEventListener("click", function () {
         })
     })
         .then(function (response) {
+            if (!response.ok) {
+                throw new Error("Could not create trainer");
+            }
             return response.json();
         })
         .then(function (data) {
-            trainerMessage.textContent = data.message;
+
+            // Viser besked når traineren er oprettet
+            trainerMessage.textContent = "Trainer created successfully! ID: " + data.trainer_id;
+
+            // Opdaterer listen med trainers
             getTrainers();
         })
         .catch(function (error) {
             console.log(error);
-            trainerMessage.textContent = "Kunne ikke oprette trainer.";
+            trainerMessage.textContent = "Could not create trainer. Check the information.";
         });
 });
 
 
-document.getElementById("addButton").addEventListener("click", function () {
-    const trainerId = document.getElementById("trainerId").value;
-    const pokemonId = document.getElementById("pokemonId").value;
+// Tilføjer en Pokémon til en trainer
+document.querySelector("#addButton").addEventListener("click", function () {
 
+    // Henter værdierne fra formularen
+    const trainerId = document.querySelector("#trainerId").value;
+    const pokemonId = document.querySelector("#pokemonId").value;
+
+    // Sender Pokémon-nummeret til API'et som JSON
     fetch("http://localhost:3000/trainers/" + trainerId + "/pokemon", {
         method: "POST",
         headers: {
@@ -103,16 +137,25 @@ document.getElementById("addButton").addEventListener("click", function () {
         })
     })
         .then(function (response) {
+            if (!response.ok) {
+                throw new Error("Could not add Pokémon");
+            }
             return response.json();
         })
         .then(function (data) {
-            addMessage.textContent = data.message;
+
+            // Viser besked når Pokémon er tilføjet
+            addMessage.textContent = "Pokémon added successfully!";
+
+            // Opdaterer trainerens Pokémon-liste
             getTrainerPokemon(trainerId);
         })
         .catch(function (error) {
             console.log(error);
-            addMessage.textContent = "Kunne ikke tilføje Pokémon.";
+            addMessage.textContent = "Could not add Pokémon. Check the IDs.";
         });
 });
 
+
+// Henter trainers når siden åbnes
 getTrainers();

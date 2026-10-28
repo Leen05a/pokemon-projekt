@@ -1,7 +1,9 @@
+/* Gælder for alle elementer */
 * {
     box-sizing: border-box;
 }
 
+/* Sidens baggrund og skrifttype */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -9,6 +11,7 @@ body {
     color: #222;
 }
 
+/* Sidens overskrift */
 header {
     background: #d62828;
     color: white;
@@ -16,6 +19,7 @@ header {
     text-align: center;
 }
 
+/* Navigation mellem siderne */
 nav {
     display: flex;
     justify-content: center;
@@ -23,16 +27,23 @@ nav {
     flex-wrap: wrap;
 }
 
+/* Gør menuens links tydelige og nemme at klikke på */
 nav a {
-    color: white;
+    background-color: white;
+    color: #d62828;
+    padding: 10px 15px;
+    border-radius: 5px;
     font-weight: bold;
     text-decoration: none;
 }
 
+/* Ændrer farven, når musen er over et link */
 nav a:hover {
+    background-color: #ffe0e0;
     text-decoration: underline;
 }
 
+/* Indholdet på hjemmesiden */
 main {
     max-width: 1000px;
     margin: 25px auto;
@@ -41,6 +52,7 @@ main {
     border-radius: 8px;
 }
 
+/* Formularer til filtrering og oprettelse */
 .filters, .form-box {
     display: flex;
     flex-direction: column;
@@ -49,11 +61,13 @@ main {
     margin-bottom: 20px;
 }
 
+/* Inputfelter og knapper */
 input, select, button {
     padding: 10px;
     font-size: 16px;
 }
 
+/* Knappernes design */
 button {
     background: #d62828;
     color: white;
@@ -62,6 +76,7 @@ button {
     cursor: pointer;
 }
 
+/* Ændrer farven når musen er over knappen */
 button:hover {
     background: #a61e1e;
 }
@@ -70,6 +85,7 @@ button.secondary {
     background: #555;
 }
 
+/* Lister med Pokémon og trainers */
 ul {
     padding-left: 25px;
 }
@@ -79,6 +95,7 @@ li {
     line-height: 1.5;
 }
 
+/* Gør listen med trainers klikbar */
 #trainerList li {
     cursor: pointer;
 }
@@ -87,6 +104,7 @@ li {
     text-decoration: underline;
 }
 
+/* Statistikboksene på dashboardet */
 .stats {
     display: flex;
     gap: 15px;
@@ -107,14 +125,22 @@ li {
     font-weight: bold;
 }
 
+/* Størrelse på diagrammerne */
 .chart-box {
     max-width: 700px;
     margin: 20px auto 40px;
 }
 
+/* Gør cirkeldiagrammet mindre */
+.pie-chart {
+    max-width: 420px;
+}
+
+/* Tilpasser hjemmesiden til mindre skærme */
 @media (max-width: 600px) {
     main {
         margin: 10px;
         padding: 15px;
     }
 }
+

@@ -1,39 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Pokemon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+<!-- Navigation mellem siderne -->
 <nav>
-    <a href="pokemon.html">Pokemon</a>
+    <a href="pokemon.html">Pokémon</a>
     <a href="trainers.html">Trainers</a>
     <a href="dashboard.html">Dashboard</a>
 </nav>
+<main>
+<h1>Pokémon</h1>
 
-<h1>Pokemon</h1>
-
+<!-- Filtre til at søge efter Pokémon -->
 <section>
-    <p>Navn: <input type="text" id="name"></p>
 
-    <p>Type:
+    <p>
+        Name:
+        <input type="text" id="name">
+    </p>
+
+    <p>
+        Type:
         <select id="type">
-            <option value="">Alle</option>
+            <option value="">All</option>
             <option value="Fire">Fire</option>
             <option value="Water">Water</option>
             <option value="Grass">Grass</option>
         </select>
     </p>
 
-    <p>Minimum attack: <input type="number" id="attack"></p>
+    <p>
+        Minimum attack:
+        <input type="number" id="attack" min="0">
+    </p>
 
-    <p><button id="filterButton">Filtrer</button></p>
+    <!-- Knapper til at filtrere og nulstille -->
+    <p>
+        <button id="filterButton">Filter</button>
+        <button id="resetButton">Reset</button>
+    </p>
+
 </section>
 
-<ul id="pokemonList"></ul>
+    <!-- Viser antal fundne Pokémon og fejlbeskeder -->
+    <p id="message"></p>
 
+    <!-- Viser Pokémon fra API'et -->
+    <ul id="pokemonList"></ul>
+
+    <!-- Her vises Pokémon og deres sæsoner fra API'et -->
+    <h2>Pokémon Seasons</h2>
+    <p>See which seasons different Pokémon appear in.</p>
+    <ul id="seasonList"></ul>
+
+</main>
+
+<!-- Henter vores JavaScript-fil -->
 <script src="js/pokemon.js"></script>
 
 </body>
