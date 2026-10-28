@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex - Trainers</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Mit Pokédex</h1>
+        <nav>
+            <a href="pokemon.html">Pokémon</a>
+            <a href="trainers.html">Trainers</a>
+            <a href="dashboard.html">Dashboard</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Trainers</h2>
+        <h3>Opret en ny trainer</h3>
+        <div class="form-box">
+            <label for="trainerName">Navn</label>
+            <input id="trainerName" type="text" placeholder="Navn">
+            <label for="trainerAge">Alder</label>
+            <input id="trainerAge" type="number" min="1" placeholder="Alder">
+            <label for="trainerHometown">Hjemby</label>
+            <input id="trainerHometown" type="text" placeholder="Hjemby">
+            <button id="createButton">Opret trainer</button>
+        </div>
+        <p id="trainerMessage"></p>
+
+        <h3>Alle trainers</h3>
+        <p>Tryk på en trainer for at se deres Pokémon.</p>
+        <ul id="trainerList"></ul>
+
+        <h3>Tilføj Pokémon til en trainer</h3>
+        <div class="form-box">
+            <label for="trainerId">Trainer ID</label>
+            <input id="trainerId" type="number" min="1" placeholder="F.eks. 1">
+            <label for="pokemonId">Pokédex-nummer</label>
+            <input id="pokemonId" type="number" min="1" max="151" placeholder="F.eks. 25">
+            <button id="addButton">Tilføj Pokémon</button>
+        </div>
+        <p id="addMessage"></p>
+
+        <h3>Trainerens Pokémon</h3>
+        <ul id="trainerPokemonList"></ul>
+    </main>
+
+    <script src="js/trainers.js"></script>
+</body>
+</html>
