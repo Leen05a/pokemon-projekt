@@ -4,6 +4,9 @@ const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql2");
 
+// Henter databaseoplysninger fra .env
+require("dotenv").config();
+
 const app = express();
 const port = 3000;
 
