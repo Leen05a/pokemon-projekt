@@ -131,18 +131,9 @@ Vi har brugt Insomnia til at teste vores API.
 
 ## Sådan starter man projektet
 
-### 1. Database
 
-Importer `backend/pokemon_database.sql` i MySQL.
 
-Opret en `.env`-fil i backend-mappen med databaseoplysninger:
-
-DB_HOST=localhost
-DB_USER=dit_brugernavn
-DB_PASSWORD=din_adgangskode
-DB_NAME=pokemon
-
-### 2. Backend
+### 1. Backend
 
 Åbn terminalen, og gå ind i backend-mappen:
 
@@ -160,7 +151,7 @@ Backend kører på:
 
 http://localhost:3000
 
-### 3. Frontend
+### 2. Frontend
 
 Åbn `frontend/pokemon.html` i browseren gennem WebStorm.
 
