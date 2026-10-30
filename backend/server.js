@@ -2,13 +2,21 @@
 // Henter de pakker, vi skal bruge til vores backend
 const express = require("express");
 const cors = require("cors");
-const connection = require("./database");
+const mysql = require("mysql2");
 
 const app = express();
+const port = 3000;
 
 // Gør det muligt for frontend at sende requests til backend
 app.use(cors());
 app.use(express.json());
+
+const connection = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
+});
 
 // Tester om serveren virker
 app.get("/", function (req, res) {
@@ -25,19 +33,19 @@ app.get("/pokemon", function (req, res) {
 
     // SQL henter de Pokémon, som passer til filtrene
     const sql = `
-        SELECT * FROM pokemon
-        WHERE (? = '' OR primary_type = ? OR secondary_type = ?)
-        AND (? = '' OR attack >= ?)
-        AND (? = '' OR name LIKE ?)
-        ORDER BY pokedex_number
-    `;
+    SELECT * FROM pokemon
+    WHERE (? = '' OR primary_type = ?)
+    AND (? = '' OR attack >= ?)
+    AND (? = '' OR name LIKE ?)
+    ORDER BY pokedex_number
+`;
 
     // Gør det muligt at søge på en del af navnet
     const searchName = "%" + name + "%";
 
     connection.query(
         sql,
-        [type, type, type, attack, attack, name, searchName],
+        [type, type, attack, attack, name, searchName],
         function (error, results) {
             if (error) {
                 console.log(error);
@@ -56,8 +64,8 @@ app.get("/pokemon/type", function (req, res) {
     const type = req.query.type || "";
 
     connection.query(
-        "SELECT * FROM pokemon WHERE primary_type = ? OR secondary_type = ? ORDER BY pokedex_number",
-        [type, type],
+        "SELECT * FROM pokemon WHERE primary_type = ? ORDER BY pokedex_number",
+        [type],
         function (error, results) {
             if (error) {
                 console.log(error);
